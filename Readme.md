@@ -1,6 +1,6 @@
 This is a tutorial for alpine.js 
 
-#Directives
+# Directives
 x-data
 x-init
 x-show
@@ -20,7 +20,7 @@ x-teleport
 x-if
 x-id
 
-#Magics
+# Magics
 $el
 $refs
 $store
@@ -31,7 +31,7 @@ $root
 $data
 $id
 
-#Globals
+# Globals
 Alpine.data()
 Alpine.store()
 Alpine.bind()
