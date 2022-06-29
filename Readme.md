@@ -3,9 +3,9 @@
 This is my learning notes for alpine.js
 
 
-## Yol haritası
+# Yol haritası
 
-# Directives
+## Directives
 - x-data
 - x-init
 - x-show
@@ -25,7 +25,7 @@ This is my learning notes for alpine.js
 - x-if
 - x-id
 
-# Magics
+## Magics
 - $el
 - $refs
 - $store
@@ -36,7 +36,7 @@ This is my learning notes for alpine.js
 - $data
 - $id
 
-# Globals
+## Globals
 - Alpine.data()
 - Alpine.store()
 - Alpine.bind()
