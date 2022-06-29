@@ -1,3 +1,7 @@
+# Alpine.js Tutorial Notes
+
+This is my learning notes for alpine.js
+
 
 ## Yol haritası
 
