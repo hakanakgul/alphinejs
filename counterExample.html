@@ -1,0 +1,16 @@
+ 
+    <div class="container mx-auto mt-6 max-w-sm text-center">
+        <h2 class="text-center font-bold text-2xl">Counter Example</h2>
+        <div x-data="{count: 0}">
+            <button 
+            class="bg-blue-600 text-white rounded-xl p-3 m-3 font-bold" x-on:click="count++">Increase
+                (+)</button>
+            <span 
+            class="bg-gray-600 p-3 text-white" 
+            x-text="count"></span>
+            <button 
+            class="bg-red-600 text-white rounded-xl p-3 m-3 font-bold" 
+            x-on:click="count--">Decrease
+                (-)</button>
+        </div>
+    </div>
