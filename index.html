@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+    <style>
+        [x-cloak]{
+            display: none;
+        }
+    </style>
+    <title>Alpine.js Crash Course</title>
+</head>
+<body>
+    <div class="container mx-auto mt-6 max-w-sm">
+        <h1 class="text-5xl mb-4">Alpinejs demo</h1>
+
+        
+        <!-- x-data alphine component -->
+        <div x-data="{
+            open: false,
+            kontrol: true,
+            isim: 'Hakan',
+            search: '',
+            posts: [
+            {title: 'Post 1'},
+            {title: 'Post 2'},
+            {title: 'Post 3'},
+            {title: 'Post 4'},
+            {title: 'Post 4'},
+            {title: 'Post 5'},
+            {title: 'Post 6'},
+            ],
+        }">
+        
+            <!-- x-on:click & x-bind:class, x-bind yazmasakta oluyor :class gibi -->
+            <button 
+            x-on:click="open = !open, kontrol=!kontrol"
+            x-bind:class="open ? 'bg-blue-800': 'bg-slate-700'"
+            class="text-white px-4 py-2 rounded-xl"> 
+                Toggle 
+            </button>
+
+            <!-- x-show  x-transition -->
+            <div 
+            x-show="open"
+            
+            x-transition.scale.50.duration.500ms
+            x-cloak>
+                <p class="bg-gray-200 p-4 my-6 rounded">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex nihil quo quasi blanditiis iste ea, repellendus tenetur. Illo ex molestias a possimus saepe nulla ad. Eaque, optio eligendi. Dolorem, illo.
+                </p>
+            </div>
+
+            <!-- x-text -->
+            <div class="my-4">
+                The value of name is <span x-text="isim" class="font-bold"></span>
+            </div>
+
+            <!-- x-effect -->
+            <div x-effect="console.log(open)" ></div>
+
+
+            <!-- x-model -->
+            <input 
+            x-model="search"
+            x-effect="console.log(search)"
+            type="text" 
+            class="border p-2 w-full mb-2 mt-6"
+            placeholder="Search for something...">
+
+            <span class="font-bold">Searching for:</span>
+            <span class="font-thin" x-text="search" ></span>
+
+            <!-- x-if -->
+            <template x-if="kontrol">
+                <div class="bg-gray-50 p-2 mt-8">
+                    Template based on a condition
+                </div>
+            </template>
+
+            <!-- x-for -->
+            <h3 class="text-2xl mt-6 mb-3 font-bold">Posts</h3>
+            <template x-for="post in posts">
+                    <div x-text="post.title"></div>
+            </template>
+
+            <button x-on:click="posts.push({title: 'New Post'})" class="bg-blue-800 text-white px-4 py-2 rounded-lg mt-4">
+                Add Post
+            </button>
+
+
+            <div class="my-6">
+            <!-- x-ref -->
+            <!-- add text -->
+                <div x-ref="text"></div>
+                <button @click="$refs.text.innerText='Okayy'" class="bg-black text-white p-2 rounded-lg">
+                    Click and add text
+                </button>
+
+                
+            <!-- remove text -->
+            <button @click="$refs.text.innerText=''" class="bg-blue-400 text-white p-2 rounded-lg">
+                Click and remove text
+            </button>
+            </div>
+
+            <!-- x-html -->
+            <div x-html="(await axios.get('./partical.html')).data"></div>
+        
+            <!-- $el -->
+            <button x-on:click="$el.innerHTML = 'Hello World'" class="mt-4 p-4 border">
+                Replace My Text
+            </button>
+
+            <!-- x-init & $watch -->
+            <div x-init="$watch('posts', value=>console.log(value))"></div>
+
+            <!-- dispatch -->
+            <div @notify="alert('bildirim çalışıyor')">
+                <button 
+                    x-on:click="$dispatch('notify')" 
+                    class="bg-green-700 text-white p-2 mt-4 rounded-lg">
+                    
+                    Notify
+                </button>
+            </div>
+
+ 
+            <!-- $data -->
+            <button 
+            x-on:click="getLatestPost($data.posts)" 
+            class="bg-orange-800 text-white mt-6 p-2 rounded-lg">
+                Get latest post 
+            </button>
+        </div>
+    </div>
+
+
+    <footer x-data class="text-center mt-10">
+        <p>Copyright &copy; <span x-text="new Date().getFullYear()"></span></p>
+    </footer>
+
+<script>
+    function getLatestPost(post)
+    {
+        console.log(post.slice(-1).pop())
+    }
+</script>
+
+</body>
+</html>
